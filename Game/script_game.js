@@ -3,10 +3,37 @@ let autoClickCount = 0;
 let autoClickCost = 10;
 let autoClickInterval;
 
+// Функция для обновления данных в локальном хранилище
+function updateLocalData() {
+    const data = {
+        username: document.getElementById('username').textContent,
+        clickCount: clickCount,
+        autoClickCount: autoClickCount,
+        autoClickCost: autoClickCost
+    };
+
+    localStorage.setItem('gameData', JSON.stringify(data));
+}
+
+// Функция для загрузки данных из локального хранилища
+function loadLocalData() {
+    const localData = JSON.parse(localStorage.getItem('gameData')) || {};
+
+    document.getElementById('username').textContent = `Игрок: ${localData.username || 'Гость'}`;
+    clickCount = localData.clickCount || 0;
+    autoClickCount = localData.autoClickCount || 0;
+    autoClickCost = localData.autoClickCost || 10;
+
+    updateClickCount();
+    updateAutoClickCount();
+    updateAutoClickCost();
+}
+
 function startAutoClick() {
     autoClickInterval = setInterval(function () {
         clickCount += autoClickCount;
         updateClickCount();
+        updateLocalData(); // Update data locally
     }, 1000);
 }
 
@@ -17,6 +44,7 @@ function stopAutoClick() {
 function incrementClickCount() {
     clickCount++;
     updateClickCount();
+    updateLocalData(); // Update data locally
 }
 
 function updateClickCount() {
@@ -33,55 +61,10 @@ function buyAutoClick() {
         updateAutoClickCost();
         enableUpgradeButton();
         startAutoClick();
+        updateLocalData(); // Update data locally
     } else {
         alert('Недостаточно монет для покупки автоклика.');
     }
-}
-const sheetDBUrl = 'https://sheetdb.io/api/v1/4648tmzmrt180';
-
-function loginUser() {
-    const usernameInput = document.getElementById('username');
-    const username = document.getElementById('usernameInput').value; // Получаем введенное имя из формы входа
-
-    // Проверка данных пользователя
-    axios.get(`${sheetDBUrl}/search?username=${username}`)
-        .then(response => {
-            const user = response.data[0];
-            if (user) {
-                alert('Вход выполнен успешно!');
-
-                // Отображаем имя игрока в блоке
-                usernameInput.textContent = `Игрок: ${username}`;
-
-                // Редирект на game.html или другие действия после успешного входа
-                window.location.href = 'game.html';
-            } else {
-                alert('Неверное имя пользователя или пароль.');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-
-    return false; // Чтобы предотвратить отправку формы
-}
-
-
-function upgradeAutoClick() {
-    const upgradeCost = calculateUpgradeCost();
-    if (clickCount >= upgradeCost) {
-        clickCount -= upgradeCost;
-        autoClickCount++;
-        updateClickCount();
-        updateAutoClickCount();
-        enableUpgradeButton();
-    } else {
-        alert('Недостаточно монет для улучшения автоклика.');
-    }
-}
-
-function calculateUpgradeCost() {
-    return Math.ceil(10 * Math.pow(1.2, autoClickCount));
 }
 
 function updateAutoClickCount() {
@@ -96,3 +79,6 @@ function enableUpgradeButton() {
     const upgradeButton = document.getElementById('upgradeAutoClickButton');
     upgradeButton.disabled = false;
 }
+
+// Загрузка данных из локального хранилища при загрузке страницы
+loadLocalData();
