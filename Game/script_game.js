@@ -27,6 +27,19 @@ function loadLocalData() {
     updateClickCount();
     updateAutoClickCount();
     updateAutoClickCost();
+
+    // Проверяем, активированы ли автоклики
+    if (autoClickCount > 0) {
+        startAutoClick();
+    }
+}
+
+// Функция для возобновления автокликов после загрузки страницы
+function resumeAutoClick() {
+    // Проверяем, активированы ли автоклики
+    if (autoClickCount > 0) {
+        startAutoClick();
+    }
 }
 
 function startAutoClick() {
@@ -82,3 +95,6 @@ function enableUpgradeButton() {
 
 // Загрузка данных из локального хранилища при загрузке страницы
 loadLocalData();
+
+// Возобновление автокликов после загрузки страницы
+resumeAutoClick();
