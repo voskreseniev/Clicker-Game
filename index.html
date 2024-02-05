@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кликер с функциями</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="topPanel">
+    <div id="userPanel">
+        <div id="userDetails">
+            <span id="username" onclick="changeUsername()">Имя пользователя</span>
+            <div id="userCoinsBlock">Монеты: <span id="count">0</span></div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Блок 1: Игра - Кликер -->
+    <div id="game" class="block">
+        <h2>Игра</h2>
+        <div id="clicker" class="button">Кликни меня!</div>
+    </div>
+
+    <!-- Блок 2: Улучшения -->
+    <div id="upgrades" class="block">
+        <h2>Улучшения</h2>
+        <button id="multiplierButton" class="button">Увеличить множитель</button>
+        <!-- Другие улучшения добавляются по мере необходимости -->
+    </div>
+
+    <!-- Блок 3: Пустой блок -->
+    <div id="emptyBlock" class="block">
+        <h2>Пустой блок</h2>
+        <!-- Пусто -->
+    </div>
+
+    <!-- Блок 4: Настройки -->
+    <div id="settings" class="block">
+        <h2>Настройки</h2>
+        <div id="userId">ID: <span id="uniqueId"></span></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
