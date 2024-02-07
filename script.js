@@ -67,7 +67,7 @@ document.getElementById("login-button").addEventListener("click", function() {
         .then(data => {
             if (data.length > 0) {
                 showMessage("Вход выполнен успешно!");
-                window.location.href = "authorized.html"; // Переход на страницу для авторизированных пользователей
+                window.location.href = `authorized.html?username=${username}`; // Переход на страницу для авторизированных пользователей с передачей имени пользователя через параметры URL
             } else {
                 showMessage("Неверное имя пользователя или пароль!");
             }
