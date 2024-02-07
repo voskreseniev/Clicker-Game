@@ -21,14 +21,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // Отправляем запрос на обновление данных пользователя
-        fetch(`https://sheetdb.io/api/v1/op18h818oikxo/search?username=${username}`)
+        fetch(`https://sheetdb.io/api/v1/5o5c5w3gv1h44/search?username=${username}`)
             .then(response => response.json())
             .then(data => {
                 const currentUser = data.find(user => user.username === username);
 
                 // Проверяем, найден ли пользователь
                 if (currentUser) {
-                    fetch(`https://sheetdb.io/api/v1/op18h818oikxo/username/${currentUser.username}`, {
+                    fetch(`https://sheetdb.io/api/v1/5o5c5w3gv1h44/username/${currentUser.username}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Функция для загрузки данных о пользователе и отображения их на странице
 function loadUserData() {
-    fetch('https://sheetdb.io/api/v1/op18h818oikxo')
+    fetch('https://sheetdb.io/api/v1/5o5c5w3gv1h44')
         .then(response => response.json())
         .then(data => {
             const userInfoElement = document.getElementById("user-info");

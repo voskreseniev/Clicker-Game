@@ -17,14 +17,14 @@ document.getElementById("form").addEventListener("submit", function(event) {
     }
 
     // Проверяем, существует ли уже пользователь с таким именем
-    fetch(`https://sheetdb.io/api/v1/op18h818oikxo/search?username=${username}`)
+    fetch(`https://sheetdb.io/api/v1/5o5c5w3gv1h44/search?username=${username}`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
                 showMessage("Пользователь с таким именем уже существует");
             } else {
                 // Отправляем запрос на регистрацию пользователя
-                fetch('https://sheetdb.io/api/v1/op18h818oikxo', {
+                fetch('https://sheetdb.io/api/v1/5o5c5w3gv1h44', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ document.getElementById("login-button").addEventListener("click", function() {
     }
 
     // Отправляем запрос на проверку существования пользователя
-    fetch(`https://sheetdb.io/api/v1/op18h818oikxo/search?username=${username}&password=${password}`)
+    fetch(`https://sheetdb.io/api/v1/5o5c5w3gv1h44/search?username=${username}&password=${password}`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
