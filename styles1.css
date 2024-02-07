@@ -1,20 +1,23 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f2f2;
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.container {
-    text-align: center;
-}
-
 h1 {
     color: #333;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#user-info {
+    margin-bottom: 20px;
 }
 
 .button {
@@ -24,9 +27,10 @@ h1 {
     padding: 15px 32px;
     text-align: center;
     font-size: 16px;
-    margin: 20px;
+    margin: 10px;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .button:hover {
@@ -37,6 +41,7 @@ h1 {
     font-size: 24px;
     font-weight: bold;
     color: #FFD700;
+    margin-bottom: 20px;
 }
 
 #clicker {
@@ -48,9 +53,25 @@ h1 {
     font-size: 24px;
     cursor: pointer;
     border-radius: 50%;
+    transition: background-color 0.3s ease;
 }
 
 #clicker:hover {
     background-color: #0b7dda;
 }
+.save-button, .logout-button {
+    background-color: #4CAF50; /* Цвет фона */
+    border: none; /* Убираем границу */
+    color: white; /* Цвет текста */
+    padding: 15px 32px; /* Отступы внутри кнопки */
+    text-align: center; /* Выравнивание текста по центру */
+    font-size: 16px; /* Размер шрифта */
+    margin: 10px; /* Внешние отступы */
+    cursor: pointer; /* Значок курсора при наведении */
+    border-radius: 5px; /* Скругление углов */
+    transition: background-color 0.3s ease; /* Плавное изменение цвета при наведении */
+}
 
+.save-button:hover, .logout-button:hover {
+    background-color: #45a049; /* Цвет фона при наведении */
+}
