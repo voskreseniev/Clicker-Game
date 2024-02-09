@@ -57,43 +57,27 @@ function loadUserData(username) {
 }
 
 // Функция для сохранения данных пользователя
-function saveUserData(username, coinCounter) {
-    fetch(`https://sheetdb.io/api/v1/5o5c5w3gv1h44/search?username=${username}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.length > 0) {
-                const user = data[0];
-                fetch(`https://sheetdb.io/api/v1/5o5c5w3gv1h44/username/${user.username}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        data: {
-                            coins: coinCounter
-                        }
-                    })
-                })
-                .then(response => {
-                    if (response.ok) {
-                        showMessage("Данные успешно сохранены!");
-                    } else {
-                        showMessage("Ошибка при сохранении данных пользователя");
-                    }
-                })
-                .catch(error => {
-                    console.error('Ошибка при сохранении данных пользователя:', error);
-                    showMessage("Ошибка при сохранении данных пользователя");
-                });
-            } else {
-                showMessage("Ошибка: пользователь не найден");
-            }
-        })
-        .catch(error => {
-            console.error('Ошибка при загрузке данных пользователя:', error);
-            showMessage("Ошибка при загрузке данных пользователя");
+async function saveUserData(username, coinCounter) {
+    try {
+        const response = await fetch(`https://sheetdb.io/api/v1/5o5c5w3gv1h44/search?username=${username}`);
+        const data = await response.json();
+        const user = data[0];
+        const putResponse = await fetch(`https://sheetdb.io/api/v1/5o5c5w3gv1h44/username/${user.username}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: { coins: coinCounter } })
         });
+        if (putResponse.ok) {
+            showMessage("Данные успешно сохранены!");
+        } else {
+            showMessage("Ошибка при сохранении данных пользователя");
+        }
+    } catch (error) {
+        console.error('Ошибка при загрузке/сохранении данных пользователя:', error);
+        showMessage("Ошибка при загрузке/сохранении данных пользователя");
+    }
 }
+
 
 function showMessage(message) {
     const messageElement = document.getElementById("message");
