@@ -29,6 +29,43 @@ document.addEventListener("DOMContentLoaded", function() {
         coinCounter += 10;
         document.getElementById("coin-counter").textContent = coinCounter;
     });
+
+    // Добавляем обработчик события для кнопки "Магазин"
+    document.getElementById("shop-button").addEventListener("click", function() {
+        const shop = document.getElementById("shop");
+        // Переключаем отображение магазина
+        if (shop.style.display === "none") {
+            shop.style.display = "block";
+        } else {
+            shop.style.display = "none";
+        }
+    });
+
+    // Добавляем обработчик события для покупки товара в магазине
+    const buyButtons = document.querySelectorAll(".buy-item");
+    buyButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            const price = parseInt(button.getAttribute("data-price"));
+            let coinCounter = parseInt(document.getElementById("coin-counter").textContent);
+            if (coinCounter >= price) {
+                coinCounter -= price;
+                document.getElementById("coin-counter").textContent = coinCounter;
+                showMessage("Товар успешно куплен!");
+                // Проверяем, является ли это покупка товаром 1
+                if (button.classList.contains('item-1')) {
+                    // Увеличиваем количество монет, получаемых при нажатии кнопки "Кликни меня!"
+                    const clickerCounter = parseInt(document.getElementById("clicker").getAttribute("data-counter"));
+                    document.getElementById("clicker").setAttribute("data-counter", clickerCounter + 1);
+                    // Увеличиваем цену товара на 50%
+                    button.setAttribute("data-price", Math.round(price * 1.5));
+                    // Обновляем текст на кнопке с новой ценой
+                    button.textContent = `Купить за ${Math.round(price * 1.5)} монет`;
+                }
+            } else {
+                showMessage("У вас недостаточно монет для покупки!");
+            }
+        });
+    });
 });
 
 // Функция для загрузки данных о пользователе и отображения их на странице
@@ -78,8 +115,9 @@ async function saveUserData(username, coinCounter) {
     }
 }
 
-
+// Функция для отображения сообщений
 function showMessage(message) {
     const messageElement = document.getElementById("message");
     messageElement.textContent = message;
 }
+    

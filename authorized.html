@@ -27,9 +27,21 @@
     <!-- Элемент для отображения сообщений -->
     <div id="message"></div>
 
-
     <!-- Кнопка для выхода -->
     <button id="logout-button">Выход</button>
+
+    <!-- Кнопка для магазина -->
+    <button id="shop-button">Магазин</button>
+    <div id="shop" style="display: none;">
+        <h2>Магазин</h2>
+        <ul id="item-list">
+            <li>Товар 1 - Цена: 10 монет <button class="buy-item" data-price="10">Купить</button></li>
+            <li>Товар 2 - Цена: 20 монет <button class="buy-item" data-price="20">Купить</button></li>
+            <li>Товар 3 - Цена: 30 монет <button class="buy-item" data-price="30">Купить</button></li>
+            <li>Товар 4 - Цена: 40 монет <button class="buy-item" data-price="40">Купить</button></li>
+            <li>Товар 5 - Цена: 50 монет <button class="buy-item" data-price="50">Купить</button></li>
+        </ul>
+    </div>
 </div>
 
 <script src="authorized.js"></script>
